@@ -7,109 +7,197 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class HomePage extends StatelessWidget {
+  HomePage({Key? key}) : super(key: key);
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  final _lengthController = TextEditingController();
+  final _girthController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      body: Container(
+        constraints: BoxConstraints.expand(),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/bg.jpg'),
+            fit: BoxFit.cover,
+          ),
         ),
+
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('PIG WEIGHT',
+                              style: TextStyle(
+                                  fontSize: 36.0,
+                                  color: Colors.redAccent.shade200)),
+                          Text('CALCULATOR',
+                              style: TextStyle(
+                                  fontSize: 36.0,
+                                  color: Colors.redAccent.shade200)),
+                          ],
+                      ),
+                    ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Image.asset('assets/images/pig.png', height: 200.0),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 15.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            children: [
+                              const Text('LENGTH',
+                                style: TextStyle(fontWeight: FontWeight.bold,
+                                    fontSize: 20.0),),
+                              const Text('(cm)',
+                                style: TextStyle(fontWeight: FontWeight.bold,
+                                    fontSize: 20.0),),
+
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16.0, bottom: 10.0),
+                                child: TextField(
+                                    controller: _lengthController,
+                                    decoration: const InputDecoration(
+                                      hintText: 'Enter length',
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(fontSize: 20.0)
+                                ),
+
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            children: [
+                              const Text('GIRTH', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+                              const Text('(cm)', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16.0, bottom: 10.0),
+                                child: TextField(
+                                    controller: _girthController,
+                                    decoration: const InputDecoration(
+                                      hintText: 'Enter girth',
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(fontSize: 20.0)
+                                ),
+
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: ElevatedButton(onPressed: (){
+                  var lengthText = _lengthController.text;
+                  var grithText =  _girthController.text;
+                  double? length = double.tryParse(lengthText);
+                  double? girth = double.tryParse(grithText);
+
+                  if(girth == null ||  length== null){
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("ERROR",style: TextStyle(
+                              color: Color(0xFFF50000),
+                          fontSize: 25.0,),
+                          ),
+                          content: const Text("Invalid input",style: TextStyle(
+                            color: Color(0xFFF50075),
+                            fontSize: 25.0,),),
+                          actions: [
+                            OutlinedButton(
+                              child: const Text('OK',style: TextStyle(
+                                color: Color(0xFF13B700),
+                                fontSize: 25.0,),),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                  else{
+                    var weight = (girth/100) * (girth/100) * (length/100) * 69.3;
+                    var price = weight * 112.50;
+                    var weightMax = (0.03 * weight)+weight;
+                    var priceMax = (0.03 * price)+price;
+                    var weightMin = weight-(0.03 * weight);
+                    var priceMin = price-(0.03 * price);
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Row(
+                              children: [
+                                Image.asset('assets/images/ic_pig.png',
+                                    width: 40, height: 30),
+                                Text('  RESULT'),
+                              ],
+                            ),
+                          ),
+                          content: Text('Weight: ${weightMin.round()} - ${weightMax.round()} kg\nPrice: ${priceMin.round()} - ${priceMax.round()} Baht'),
+                          actions: [
+                            TextButton(
+                              child: const Text('OK'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }
+                }, child: Text('CALCULATE'),),
+              ),
+            ],
+          ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
